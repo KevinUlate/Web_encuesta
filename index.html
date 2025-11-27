@@ -129,10 +129,21 @@ document.getElementById("surveyForm").addEventListener("submit", function(event)
     formData.append("Servicio", document.getElementById("rating5").value);
     formData.append("Comentario", document.getElementById("comments").value);
 
-    fetch("https://script.google.com/macros/s/AKfycbwLceag53zmQJIAcQfLs4axD3uyO1qZ6uhV5bTlo-4csWQ9E04W27PlXeaEzK1QZ7zJlg/exec", {
-        method: "POST",
-        body: formData,
-        mode: "no-cors"
+    fetch("https://script.google.com/macros/s/TU_NUEVA_URL/exec", {
+    method: "POST",
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+    alert("¡Gracias por completar la encuesta!");
+    document.getElementById("surveyForm").reset();
+})
+.catch(error => {
+    console.error("Error:", error);
+    alert("Hubo un error al enviar la encuesta.");
+});
+
     });
 
     alert("¡Gracias por completar la encuesta!");
@@ -142,6 +153,7 @@ document.getElementById("surveyForm").addEventListener("submit", function(event)
 
 </body>
 </html>
+
 
 
 
