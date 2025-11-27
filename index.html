@@ -120,30 +120,29 @@
 document.getElementById("surveyForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let data = {
-        NPS: document.getElementById("rating1").value,
-        CSAT: document.getElementById("rating2").value,
-        Calidad: document.getElementById("rating3").value,
-        Contenido: document.getElementById("rating4").value,
-        Servicio: document.getElementById("rating5").value,
-        Comentario: document.getElementById("comments").value
-    };
+    const formData = new FormData();
+
+    formData.append("NPS", document.getElementById("rating1").value);
+    formData.append("CSAT", document.getElementById("rating2").value);
+    formData.append("Calidad", document.getElementById("rating3").value);
+    formData.append("Contenido", document.getElementById("rating4").value);
+    formData.append("Servicio", document.getElementById("rating5").value);
+    formData.append("Comentario", document.getElementById("comments").value);
 
     fetch("https://script.google.com/macros/s/AKfycbyUkxJEblN83UB6wrhUfZEejrpvM3iUUm8F-SAZa-Z7XlCWM_OfEHha-1wGVowt0iLNUA/exec", {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: formData,
+        mode: "no-cors"
     });
 
     alert("¡Gracias por completar la encuesta!");
-
     document.getElementById("surveyForm").reset();
 });
 </script>
 
 </body>
 </html>
+
 
 
 
